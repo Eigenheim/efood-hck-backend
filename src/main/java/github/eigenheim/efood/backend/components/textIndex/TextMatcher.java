@@ -1,9 +1,11 @@
 package github.eigenheim.efood.backend.components.textIndex;
 
+import github.eigenheim.efood.backend.components.index.IndexService;
 import github.eigenheim.efood.backend.components.product.Product;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Matches an image to a product.
@@ -11,7 +13,7 @@ import java.util.List;
  * @author nmodry
  * @version 1.0
  */
-public class TextMatcher implements TextIndexService{
+public class TextMatcher implements IndexService {
 
     /**
      * Matches an image to a product.
@@ -22,9 +24,9 @@ public class TextMatcher implements TextIndexService{
      * @return the product_id of the most likely product
      */
     @Override
-    public long match(BufferedImage image) {
+    public Map<Long, Double> match(BufferedImage image) {
         //FIXME implement
-        return 0;
+        return null;
     }
 
 
