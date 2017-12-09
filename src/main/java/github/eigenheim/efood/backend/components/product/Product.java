@@ -30,4 +30,8 @@ public class Product {
     public String getDescription() {
         return description;
     }
+
+    public long getId () {
+        return id;
+    }
 }

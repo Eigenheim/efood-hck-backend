@@ -4,6 +4,8 @@ import github.eigenheim.efood.backend.components.index.IndexService;
 import github.eigenheim.efood.backend.components.product.Product;
 
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +18,9 @@ import java.util.Map;
 public class TextMatcher implements IndexService {
 
     /**
-     * A list of products that the read-in text should be matched to.
+     * A map of products that the read-in text should be matched to.
      */
-    private List<String> itemWords;
+    private HashMap<Product, List<String>> products;
 
     /**
      * Matches an image to a product.
@@ -30,8 +32,28 @@ public class TextMatcher implements IndexService {
      */
     @Override
     public Map<Long, Double> match(BufferedImage image) {
-        //FIXME implement
-        return null;
+
+        final List<String> detectedWords = TextPreprocessor.preprocess(TextExtractor.extract(image));
+        final HashMap<Product, Integer> equals = new HashMap<>();
+
+        detectedWords.forEach(w -> {
+
+            this.products.forEach((k,v)->{
+
+                int equal = (int) v.stream().filter(iw -> iw.equals(w)).count();
+
+                equals.put(k, equals.get(k) + equal);
+
+            });
+
+        });
+
+        final HashMap<Long, Double> matches = new HashMap<>();
+        equals.forEach((k,v)-> {
+            matches.put(k.getId(), ((double) v)/((double) this.products.get(k).size()));
+        });
+
+        return matches;
     }
 
 
@@ -51,10 +73,13 @@ public class TextMatcher implements IndexService {
 
             products.forEach(p -> {
 
+                LinkedList<String> itemWords = new LinkedList<>();
+
                 itemWords.addAll(TextPreprocessor.preprocess(p.getName()));
                 itemWords.addAll(TextPreprocessor.preprocess(p.getDescription()));
                 itemWords.addAll(TextPreprocessor.preprocess(p.getManufacturer()));
 
+                this.products.put(p, itemWords);
             });
 
         }
