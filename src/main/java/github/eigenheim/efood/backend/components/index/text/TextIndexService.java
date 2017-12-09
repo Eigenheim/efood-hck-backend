@@ -44,7 +44,7 @@ public class TextIndexService implements IndexService {
 
                 int equal = (int) v.stream().filter(iw -> iw.equals(w)).count();
 
-                equals.put(k, equals.get(k) + equal);
+                equals.put(k, (equals.get(k)!=null?equals.get(k):0) + equal);
 
             });
 
