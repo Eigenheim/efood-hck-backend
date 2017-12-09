@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -31,7 +32,7 @@ public class ImageSearchServiceImpl implements ImageSearchService {
         Product product = null;
 
         try {
-            List<ScoredResult> searchResults = Collections.emptyList();
+            List<ScoredResult> searchResults = new LinkedList<>();
             List<ScoredResult> resultsLocalImageFeatures =
                     imageIndexService.match(image);
             List<ScoredResult> resultsTextFeatures =

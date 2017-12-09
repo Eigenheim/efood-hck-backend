@@ -38,8 +38,6 @@ public class ImageSearchController {
             ioe.printStackTrace();
         }
 
-        System.out.println(product.getName());
-
         return product;
     }
 }

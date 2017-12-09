@@ -2,6 +2,7 @@ package github.eigenheim.efood.backend;
 
 import github.eigenheim.efood.backend.components.imagesearch.ImageSearchService;
 import github.eigenheim.efood.backend.components.index.Indexer;
+import github.eigenheim.efood.backend.components.product.Product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,12 +19,5 @@ public class Application {
 
         Indexer indexer = context.getBean(Indexer.class);
         indexer.run();
-
-        ImageSearchService imageSearchService =
-                context.getBean(ImageSearchService.class);
-
-        BufferedImage queryImage = ImageIO
-                .read(new File("src/main/resources/test/IMG_20171209_142033.jpg"));
-        imageSearchService.search(queryImage);
     }
 }
