@@ -1,7 +1,10 @@
 package github.eigenheim.efood.backend.components.textIndex;
 
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
+
 import java.awt.image.BufferedImage;
-import java.util.List;
 
 /**
  * Extracts text from an image
@@ -11,11 +14,20 @@ import java.util.List;
  */
 public class TextExtractor {
 
-    public static List<String> extract(BufferedImage image) {
+    public static String extract(BufferedImage image) {
 
-        //FIXME implement
+        ITesseract instance = new Tesseract();
+        instance.setLanguage("deu+eng");
 
-        return null;
+        String result = null;
+
+        try {
+            result = instance.doOCR(image);
+        } catch (TesseractException e) {
+            result = null;
+        }
+
+        return result;
     }
 
 }
