@@ -15,7 +15,7 @@ public interface IndexService {
      * @param image Query image
      * @return (ProductId, Confidence)
      */
-    Map<Long, Double> match(BufferedImage image) throws Exception;
+    List<ScoredResult> match(BufferedImage image);
 
     /**
      * Indexes the given
