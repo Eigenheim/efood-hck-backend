@@ -1,6 +1,7 @@
 package github.eigenheim.efood.backend.components.textIndex;
 
 import github.eigenheim.efood.backend.components.index.IndexService;
+import github.eigenheim.efood.backend.components.index.ScoredResult;
 import github.eigenheim.efood.backend.components.product.Product;
 
 import java.awt.image.BufferedImage;
@@ -31,7 +32,7 @@ public class TextMatcher implements IndexService {
      *                          not been called before.
      */
     @Override
-    public Map<Long, Double> match(BufferedImage image) {
+    public List<ScoredResult> match(BufferedImage image) {
 
         final List<String> detectedWords = TextPreprocessor.preprocess(TextExtractor.extract(image));
         final HashMap<Product, Integer> equals = new HashMap<>();
@@ -48,9 +49,9 @@ public class TextMatcher implements IndexService {
 
         });
 
-        final HashMap<Long, Double> matches = new HashMap<>();
+        final LinkedList<ScoredResult> matches = new LinkedList<>();
         equals.forEach((k,v)-> {
-            matches.put(k.getId(), ((double) v)/((double) this.products.get(k).size()));
+            matches.add(new ScoredResult(k.getId(), ((double) v)/((double) this.products.get(k).size())));
         });
 
         return matches;
