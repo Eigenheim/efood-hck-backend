@@ -16,6 +16,11 @@ import java.util.Map;
 public class TextMatcher implements IndexService {
 
     /**
+     * A list of products that the read-in text should be matched to.
+     */
+    private List<Product> productList;
+
+    /**
      * Matches an image to a product.
      *
      * @param image the image that should be processed
@@ -37,6 +42,9 @@ public class TextMatcher implements IndexService {
      */
     @Override
     public void index(List<Product> products) {
-        //FIXME implement
+        if (products == null || products.size() == 0) {
+            throw new NullPointerException("param must not be null or empty");
+        }
+        this.productList = products;
     }
 }
