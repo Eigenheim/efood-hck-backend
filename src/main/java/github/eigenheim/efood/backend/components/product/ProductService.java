@@ -8,7 +8,7 @@ public interface ProductService {
      * @param productId ProductId
      * @return Product
      */
-    Product get(long productId);
+    Product get(String productId);
 
     /**
      * Saves a product to
@@ -16,5 +16,5 @@ public interface ProductService {
      *
      * @param product Product
      */
-    void save(Product product);
+    Product save(Product product);
 }
