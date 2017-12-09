@@ -18,15 +18,15 @@ public class TextMatcher implements IndexService {
     /**
      * A list of products that the read-in text should be matched to.
      */
-    private List<Product> productList;
+    private List<String> itemWords;
 
     /**
      * Matches an image to a product.
      *
      * @param image the image that should be processed
+     * @return the product_id of the most likely product
      * @throws RuntimeException if {@see github.eigenheim.efood.backend.components.textIndex#index} has
      *                          not been called before.
-     * @return the product_id of the most likely product
      */
     @Override
     public Map<Long, Double> match(BufferedImage image) {
@@ -36,15 +36,28 @@ public class TextMatcher implements IndexService {
 
 
     /**
-     * Initialize a list of products to compare the text extracts with.
+     * Initialize a list of words taken from product titles, manufactorers and descriptions to compare the text extracts with.
      *
      * @param products the list of products
      */
     @Override
-    public void index(List<Product> products) {
+    public void index(final List<Product> products) {
+
         if (products == null || products.size() == 0) {
             throw new NullPointerException("param must not be null or empty");
         }
-        this.productList = products;
+
+        synchronized (this) {
+
+            products.forEach(p -> {
+
+                itemWords.addAll(TextPreprocessor.preprocess(p.getName()));
+                itemWords.addAll(TextPreprocessor.preprocess(p.getDescription()));
+                itemWords.addAll(TextPreprocessor.preprocess(p.getManufacturer()));
+
+            });
+
+        }
+
     }
 }
