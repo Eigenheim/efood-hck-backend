@@ -19,14 +19,16 @@ public class Product {
     private String name;
     private String manufacturer;
     private String imageUrl;
+    private String code;
 
     @Lob
     private String description;
 
     protected Product() {}
 
-    public Product(String name, String manufacturer,
+    public Product(String code, String name, String manufacturer,
                    String description, String imagePath) {
+        this.code = code;
         this.name = name;
         this.manufacturer = manufacturer;
         this.description = description;
@@ -51,5 +53,9 @@ public class Product {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getCode() {
+        return code;
     }
 }

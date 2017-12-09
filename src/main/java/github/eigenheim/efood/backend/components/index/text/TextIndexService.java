@@ -1,14 +1,14 @@
-package github.eigenheim.efood.backend.components.textIndex;
+package github.eigenheim.efood.backend.components.index.text;
 
 import github.eigenheim.efood.backend.components.index.IndexService;
 import github.eigenheim.efood.backend.components.index.ScoredResult;
 import github.eigenheim.efood.backend.components.product.Product;
+import org.springframework.stereotype.Service;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Matches an image to a product.
@@ -16,12 +16,13 @@ import java.util.Map;
  * @author nmodry
  * @version 1.0
  */
-public class TextMatcher implements IndexService {
+@Service
+public class TextIndexService implements IndexService {
 
     /**
      * A map of products that the read-in text should be matched to.
      */
-    private HashMap<Product, List<String>> products;
+    private HashMap<Product, List<String>> products = new HashMap<>();
 
     /**
      * Matches an image to a product.

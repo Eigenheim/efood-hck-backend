@@ -29,8 +29,8 @@ import java.util.List;
 
 @Service
 public class ImageIndexService implements IndexService {
-    private static final String INDEX_PATH = "src/main/resources/index/image";
-    private static final int MAX_NUMBER_HITS = 5;
+    private static final String INDEX_PATH = "src/main/resources/index";
+    private static final int MAX_NUMBER_HITS = 20;
 
     private DocumentBuilder documentBuilder;
     private ImageSearcher imageSearcher;
@@ -38,7 +38,7 @@ public class ImageIndexService implements IndexService {
 
     @PostConstruct
     public void init() throws IOException {
-        documentBuilder = new LocalDocumentBuilder();
+        documentBuilder = new GlobalDocumentBuilder(CEDD.class);
         imageSearcher = new GenericFastImageSearcher(MAX_NUMBER_HITS, CEDD.class);
     }
 

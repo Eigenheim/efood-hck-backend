@@ -11,7 +11,7 @@ public class ExceptionController {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value= HttpStatus.NOT_FOUND)
-    protected String notFound(RuntimeException ex) {
-        return "not found";
+    public String notFound(RuntimeException ex) {
+        return "Not Found";
     }
 }

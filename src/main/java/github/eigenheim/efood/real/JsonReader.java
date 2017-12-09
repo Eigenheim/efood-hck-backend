@@ -1,4 +1,4 @@
-package github.eigenheim.efood.backend.util;
+package github.eigenheim.efood.real;
 
 import org.json.JSONException;
 import org.json.JSONObject;

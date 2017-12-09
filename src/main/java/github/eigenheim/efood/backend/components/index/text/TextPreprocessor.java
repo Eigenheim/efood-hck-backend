@@ -1,4 +1,4 @@
-package github.eigenheim.efood.backend.components.textIndex;
+package github.eigenheim.efood.backend.components.index.text;
 
 import java.util.Arrays;
 import java.util.LinkedList;
