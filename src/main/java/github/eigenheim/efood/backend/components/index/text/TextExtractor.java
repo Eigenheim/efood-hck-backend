@@ -17,7 +17,7 @@ public class TextExtractor {
     public static String extract(BufferedImage image) {
 
         ITesseract instance = new Tesseract();
-        instance.setLanguage("deu+eng");
+        instance.setLanguage("eng");
 
         String result = null;
 
